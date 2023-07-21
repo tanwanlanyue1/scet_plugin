@@ -38,4 +38,10 @@ class ScetPluginWeb extends ScetPluginPlatform {
     String userAgent = html.window.navigator.userAgent;
     return userAgent.contains('miniProgram');
   }
+
+  /// 判断是否是微信 的 浏览器
+  bool isUsingWeChat() {
+    String userAgent = html.window.navigator.userAgent;
+    return userAgent.contains('MicroMessenger');
+  }
 }
