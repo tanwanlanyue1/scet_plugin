@@ -40,7 +40,7 @@ class ScetPluginWeb extends ScetPluginPlatform {
   }
 
   /// 判断是否是微信 的 浏览器
-  bool isUsingWeChat() {
+  static bool isUsingWeChat() {
     String userAgent = html.window.navigator.userAgent;
     return userAgent.contains('MicroMessenger');
   }
