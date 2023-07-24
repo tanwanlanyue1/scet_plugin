@@ -4,9 +4,7 @@
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html show window;
 import 'dart:js' as js;
-
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
-import 'package:js/js.dart';
 
 import 'scet_plugin_platform_interface.dart';
 

@@ -1,11 +1,11 @@
 name: scet_plugin
 description: scet_plugin_custom
-version: 0.0.5
+version: 0.0.6
 homepage:
 
 environment:
   sdk: '>=2.19.0 <3.0.0'
-  flutter: ">=2.5.0"
+  flutter: ">=3.7.0"
 
 dependencies:
   flutter:
@@ -13,7 +13,7 @@ dependencies:
   flutter_web_plugins:
     sdk: flutter
   plugin_platform_interface: ^2.0.2
-  flutter_screenutil: 5.5.3+2 # 屏幕适配
+  flutter_screenutil: 5.8.4 # 屏幕适配
   bot_toast: ^4.0.1 #弹出框
   date_format: ^2.0.4 #时间处理
   permission_handler: ^9.0.1 #授权校验
