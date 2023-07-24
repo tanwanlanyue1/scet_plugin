@@ -1,6 +1,6 @@
 name: scet_plugin
 description: scet_plugin_custom
-version: 0.0.6
+version: 0.0.7
 homepage:
 
 environment:
@@ -16,7 +16,7 @@ dependencies:
   flutter_screenutil: 5.8.4 # 屏幕适配
   bot_toast: ^4.0.1 #弹出框
   date_format: ^2.0.4 #时间处理
-  permission_handler: ^9.0.1 #授权校验
+  permission_handler: ^10.2.0 #授权校验
   shared_preferences: ^2.0.5 #本地存储
   path_provider: ^2.0.2 #创建目录和文件
   image_gallery_saver: ^1.6.9 #保存图片到图库
