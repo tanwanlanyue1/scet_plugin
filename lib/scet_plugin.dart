@@ -24,12 +24,12 @@ class ScetPlugin {
   }
 
   /// 判断是否小程序
-  Future<bool> getIsMiniProgramn() {
+  static Future<bool> getIsMiniProgramn() {
     return  ScetPluginPlatform.instance.getIsMiniProgramn();
   }
 
   /// 判断是否是微信 的 浏览器
-  Future<bool> getIsUsingWeChat() {
+  static Future<bool> getIsUsingWeChat() {
     return  ScetPluginPlatform.instance.getIsUsingWeChat();
   }
 }
