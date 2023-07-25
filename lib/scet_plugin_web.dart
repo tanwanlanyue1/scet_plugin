@@ -35,14 +35,14 @@ class ScetPluginWeb extends ScetPluginPlatform {
 
   /// 判断是否小程序
   @override
-  Future<bool> getIsMiniProgramn() async {
+  bool getIsMiniProgramn()  {
     String userAgent = html.window.navigator.userAgent;
     return userAgent.contains('miniProgram');
   }
 
   /// 判断是否是微信 的 浏览器
   @override
-  Future<bool> getIsUsingWeChat() async{
+  bool getIsUsingWeChat() {
     String userAgent = html.window.navigator.userAgent;
     return userAgent.contains('MicroMessenger');
   }

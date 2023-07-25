@@ -11,21 +11,22 @@ class MockScetPluginPlatform
   @override
   Future<String?> getPlatformVersion() => Future.value('42');
 
+
   @override
-  Future<bool> getIsMiniProgramn() {
+  Future<String?> weiXinDownLoad(String filePath) {
+    // TODO: implement weiXinDownLoad
+    throw UnimplementedError();
+  }
+
+  @override
+  bool getIsMiniProgramn() {
     // TODO: implement getIsMiniProgramn
     throw UnimplementedError();
   }
 
   @override
-  Future<bool> getIsUsingWeChat() {
+  bool getIsUsingWeChat() {
     // TODO: implement getIsUsingWeChat
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<String?> weiXinDownLoad(String filePath) {
-    // TODO: implement weiXinDownLoad
     throw UnimplementedError();
   }
 }

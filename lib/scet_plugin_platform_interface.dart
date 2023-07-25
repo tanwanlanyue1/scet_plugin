@@ -33,12 +33,12 @@ abstract class ScetPluginPlatform extends PlatformInterface {
   }
 
   /// 判断是否小程序
-  Future<bool> getIsMiniProgramn() {
+  bool getIsMiniProgramn() {
     throw UnimplementedError('getIsMiniProgramn() has not been implemented.');
   }
 
   /// 判断是否是微信 的 浏览器
-  Future<bool> getIsUsingWeChat() {
+  bool getIsUsingWeChat() {
     throw UnimplementedError('getIsMiniProgramn() has not been implemented.');
   }
 }

@@ -17,13 +17,13 @@ class MethodChannelScetPlugin extends ScetPluginPlatform {
 
   /// 判断是否小程序
   @override
-  Future<bool> getIsMiniProgramn() async {
+  bool getIsMiniProgramn()  {
     return false;
   }
 
   /// 判断是否是微信 的 浏览器
   @override
-  Future<bool> getIsUsingWeChat() async{
+  bool getIsUsingWeChat() {
     return false;
   }
 
