@@ -1,6 +1,3 @@
-import 'package:flutter/foundation.dart';
-import 'package:scet_plugin/scet_plugin_web.dart';
-
 import 'scet_plugin_platform_interface.dart';
 import 'package:bot_toast/bot_toast.dart';
 class ScetPlugin {
