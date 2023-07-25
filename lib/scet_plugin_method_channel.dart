@@ -14,4 +14,21 @@ class MethodChannelScetPlugin extends ScetPluginPlatform {
     final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
     return version;
   }
+
+  /// 判断是否小程序
+  @override
+  Future<bool> getIsMiniProgramn() async {
+    return false;
+  }
+
+  /// 判断是否是微信 的 浏览器
+  @override
+  Future<bool> getIsUsingWeChat() async{
+    return false;
+  }
+
+  @override
+  Future<String?> weiXinDownLoad(String filePath) async{
+    return '未实现';
+  }
 }

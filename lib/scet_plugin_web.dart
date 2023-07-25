@@ -26,19 +26,23 @@ class ScetPluginWeb extends ScetPluginPlatform {
 
 
   /// Returns a [String] containing the version of the platform.
-  static Future<String?> WeiXinDownLoad(String filePath) async {
+  /// 开始微信js通讯
+  @override
+  Future<String?> weiXinDownLoad(String filePath) async {
     print('开始微信js通讯');
     return js.context.callMethod('wxPostMessage',[filePath]);
   }
 
   /// 判断是否小程序
-  static bool isMiniProgram() {
+  @override
+  Future<bool> getIsMiniProgramn() async {
     String userAgent = html.window.navigator.userAgent;
     return userAgent.contains('miniProgram');
   }
 
   /// 判断是否是微信 的 浏览器
-  static bool isUsingWeChat() {
+  @override
+  Future<bool> getIsUsingWeChat() async{
     String userAgent = html.window.navigator.userAgent;
     return userAgent.contains('MicroMessenger');
   }

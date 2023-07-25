@@ -26,4 +26,19 @@ abstract class ScetPluginPlatform extends PlatformInterface {
   Future<String?> getPlatformVersion() {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
+
+  /// web下的微信下载事件
+  Future<String?> weiXinDownLoad(String filePath) {
+    throw UnimplementedError('getIsMiniProgramn() has not been implemented.');
+  }
+
+  /// 判断是否小程序
+  Future<bool> getIsMiniProgramn() {
+    throw UnimplementedError('getIsMiniProgramn() has not been implemented.');
+  }
+
+  /// 判断是否是微信 的 浏览器
+  Future<bool> getIsUsingWeChat() {
+    throw UnimplementedError('getIsMiniProgramn() has not been implemented.');
+  }
 }
