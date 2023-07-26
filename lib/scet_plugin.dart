@@ -1,17 +1,26 @@
+import 'package:flutter/material.dart';
+import 'package:scet_plugin/scet_ui/scet_ui.dart';
 import 'scet_plugin_platform_interface.dart';
 import 'package:bot_toast/bot_toast.dart';
+import 'components/toast_widget/toast_widget.dart';
 class ScetPlugin {
+  /// 插件初始化
+  /// navigatorKey 路由key
+  static init(){
+    print('---中联兴插件初始化---');
+  }
 
   Future<String?> getPlatformVersion() {
     return ScetPluginPlatform.instance.getPlatformVersion();
   }
 
   //App 项目使用的吐司插件初始化需要的参数
-  botToastInit(){
+  static TransitionBuilder botToastInit(){
     return BotToastInit();
   }
 
-  botToastNavigatorObserver(){
+  //App 项目使用的吐司插件初始化需要的参数
+  static BotToastNavigatorObserver botToastNavigatorObserver(){
     return BotToastNavigatorObserver();
   }
 
@@ -29,4 +38,5 @@ class ScetPlugin {
   static bool getIsUsingWeChat() {
     return  ScetPluginPlatform.instance.getIsUsingWeChat();
   }
+
 }

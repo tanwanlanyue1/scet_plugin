@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:scet_plugin/tool/screen/screen.dart';
 import 'package:scet_plugin/tool/listView/un_listview.dart';
+import 'package:scet_plugin/tool/screen/screen.dart';
 
 /// 下拉选择器 支持 单选 多选操作
 class DownInput extends StatefulWidget {
@@ -11,8 +11,8 @@ class DownInput extends StatefulWidget {
   final List? data;     // 列表数据[{'name':标题}]
   final Map? currentData;//默认选中项（单选参数 或有id即可）
   final List? currentDataList;//默认选中项（多选参数 每项有id即可）
-  final Function? callback;     // 事件
-  final Function? beforeClick;  //点击返回前的点击处理
+  final callback;     // 事件
+  final beforeClick;  //点击返回前的点击处理
   final bool more;    // 是否开启多选状态 默认单选
   final bool readOnly;    // 是否开启只读
   final bool invert; // 是否开启反选
@@ -141,7 +141,7 @@ class _DownInputState extends State<DownInput> {
         height: px(72.0),
         key: _globalKey,
         decoration: BoxDecoration(
-          color: widget.readOnly ? Colors.transparent : const Color(0XFFF5F6FA),
+          color: widget.readOnly ? Colors.transparent : Color(0XFFF5F6FA),
           // border: Border.all(width: px(1.0),color: Color(0X99A1A6B3)),
           borderRadius: BorderRadius.all(Radius.circular(px(4.0))),
         ),
@@ -151,9 +151,9 @@ class _DownInputState extends State<DownInput> {
                 child: ScrollConfiguration(
                     behavior: OverScrollBehavior(),
                     child:ListView(
-                      padding: const EdgeInsets.all(0),
+                      padding: EdgeInsets.all(0),
                       scrollDirection:Axis.horizontal,
-                      physics: const AlwaysScrollableScrollPhysics(),
+                      physics: AlwaysScrollableScrollPhysics(),
                       children: [
                         Container(
                           height: px(56),
@@ -164,7 +164,7 @@ class _DownInputState extends State<DownInput> {
                             '${_value == null || _value == '' ? _hitStr : _value?.replaceAll("\n", " ")}',
                             style: TextStyle(
                                 fontSize:sp(28.0),
-                                color: _currentData.isEmpty && _currentDataList.isEmpty ? const Color(0XFFA8ABB3) : Color(0XFF45474D)
+                                color: _currentData.isEmpty && _currentDataList.isEmpty ? Color(0XFFA8ABB3) : Color(0XFF45474D)
                             ),
                           ),
                         ),
@@ -176,7 +176,7 @@ class _DownInputState extends State<DownInput> {
             SizedBox(
               width: px(50.0),
               height: px(56.0),
-              child: const Icon(Icons.expand_more,color: Color(0xff8A8E99)),
+              child: Icon(Icons.expand_more,color: Color(0xff8A8E99)),
             ):
             Container(),
           ],
@@ -188,7 +188,7 @@ class _DownInputState extends State<DownInput> {
           return;
         }
         if(widget.beforeClick != null) {
-          widget.beforeClick?.call();
+          widget.beforeClick();
         }
         if(widget.value ==null ) {
           print('未设置value---->\nvalue：选中后的内容，设置为您变量中的参数\nhitStr:默认提示',);
@@ -201,13 +201,17 @@ class _DownInputState extends State<DownInput> {
 
         final _height = MediaQuery.of(context).size.height;
 
+        final bottonDy = renderBox.localToGlobal(Offset(0.0, renderBox.size.height)).dy; //组件下方坐标
+
+        final _count = _data.length >= 5 ? 5 : _data.length; // 下拉的高度
+
         /// 判断选择框是靠上还是靠下
-        if((renderBox.localToGlobal(Offset.zero).dy +  (5 * px(58.0) + px(40))) > _height){
+        if((bottonDy +  (_count * px(58.0) + px(40))) > _height){
           box = Rect.fromLTRB(
               renderBox.localToGlobal(Offset.zero).dx,
-              renderBox.localToGlobal(Offset.zero).dy - (5 * px(58.0) + px(40) + px(72)),
+              renderBox.localToGlobal(Offset.zero).dy - (_count * px(58.0) + px(40) + px(72)),
               box.right,
-              box.bottom - (5 * px(58.0) + px(40)+ px(72)));
+              box.bottom - (_count * px(58.0) + px(0)+ px(72)));
         }
 
         Navigator.push(
@@ -405,31 +409,31 @@ class _WindowsPopState extends State<WindowsPop> {
                   itemBuilder: (BuildContext context, int index) {
                     return InkWell(
                       child: Container(
-                        height: px(58.0),
-                        width: double.infinity,
-                        padding: EdgeInsets.only(left: px(16.0)),
-                        alignment: Alignment.centerLeft,
-                        decoration: BoxDecoration(
-                            border: Border(bottom: BorderSide(width: px(1.0),color: Color(0X99A1A6B3))),
-                            color: (_bools(index) ? Theme.of(context).primaryColor : Colors.transparent)
-                        ),
-                        child: ListView(
-                          padding: EdgeInsets.all(0),
-                          scrollDirection:Axis.horizontal,
-                          physics: AlwaysScrollableScrollPhysics(),
-                          children: [
-                            Container(
-                              height: px(56),
-                              color: Colors.transparent,
-                              alignment: Alignment.center,
-                              // child:Text('${_data[index]['name']?.replaceAll("\n", " ")}',style: TextStyle(fontSize: sp(26.0),color: (_bools(index) ? Colors.white : Colors.black)),),
-                              child:Text(_data[index][_dataKey] != null ?
-                                  '${_data[index][_dataKey]?.replaceAll("\n", " ")}':
-                                  '${_data[index]['title']?.replaceAll("\n", " ")}',
-                                style: TextStyle(fontSize: sp(26.0),color: (_bools(index) ? Colors.white : Colors.black)),),
-                            ),
-                          ],
-                        )
+                          height: px(58.0),
+                          width: double.infinity,
+                          padding: EdgeInsets.only(left: px(16.0)),
+                          alignment: Alignment.centerLeft,
+                          decoration: BoxDecoration(
+                              border: Border(bottom: BorderSide(width: px(1.0),color: Color(0X99A1A6B3))),
+                              color: (_bools(index) ? Theme.of(context).primaryColor : Colors.transparent)
+                          ),
+                          child: ListView(
+                            padding: EdgeInsets.all(0),
+                            scrollDirection:Axis.horizontal,
+                            physics: AlwaysScrollableScrollPhysics(),
+                            children: [
+                              Container(
+                                height: px(56),
+                                color: Colors.transparent,
+                                alignment: Alignment.center,
+                                // child:Text('${_data[index]['name']?.replaceAll("\n", " ")}',style: TextStyle(fontSize: sp(26.0),color: (_bools(index) ? Colors.white : Colors.black)),),
+                                child:Text(_data[index][_dataKey] != null ?
+                                '${_data[index][_dataKey]?.replaceAll("\n", " ")}':
+                                '${_data[index]['title']?.replaceAll("\n", " ")}',
+                                  style: TextStyle(fontSize: sp(26.0),color: (_bools(index) ? Colors.white : Colors.black)),),
+                              ),
+                            ],
+                          )
 
                       ),
                       onTap: () {

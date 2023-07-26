@@ -1,32 +1,28 @@
 import 'package:flutter/material.dart';
-
-///去除ListView 滑動波紋
+/*
+* $作用：去除ListView 滑動波紋
+* $參考：https://blog.csdn.net/u013894711/article/details/102572581
+* */
 class OverScrollBehavior extends ScrollBehavior{
 
   @override
-  Widget buildViewportChrome(BuildContext context, Widget child, AxisDirection axisDirection) {
+  Widget buildOverscrollIndicator(BuildContext context, Widget child, ScrollableDetails  details) {
     switch (getPlatform(context)) {
       case TargetPlatform.iOS: return child;
       case TargetPlatform.android:
       case TargetPlatform.fuchsia:
         return GlowingOverscrollIndicator(
-          child: child,
-          //不显示头部水波纹
-          showLeading: false,
-          //不显示尾部水波纹
-          showTrailing: false,
-          axisDirection: axisDirection,
-          color: Colors.transparent,
+            child: child,
+            //不显示头部水波纹
+            showLeading: false,
+            //不显示尾部水波纹
+            showTrailing: false,
+            axisDirection: details.direction,
+            color: Theme.of(context).colorScheme.secondary
         );
-      case TargetPlatform.linux:
-        // TODO: Handle this case.
-        break;
-      case TargetPlatform.macOS:
-        // TODO: Handle this case.
-        break;
-      case TargetPlatform.windows:
-        // TODO: Handle this case.
-        break;
+      case TargetPlatform.linux:break;
+      case TargetPlatform.macOS:break;
+      case TargetPlatform.windows:break;
     }
     return Container();
   }

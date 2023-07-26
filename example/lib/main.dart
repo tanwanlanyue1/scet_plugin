@@ -52,8 +52,8 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: '123',
-      builder: ScetPlugin().botToastInit(), //1. call BotToastInit
-      navigatorObservers: [ScetPlugin().botToastNavigatorObserver()],
+      builder: ScetPlugin.botToastInit(), //1. call BotToastInit
+      navigatorObservers: [ScetPlugin.botToastNavigatorObserver()],
       routes: {},//2
       home: pages()
     );
