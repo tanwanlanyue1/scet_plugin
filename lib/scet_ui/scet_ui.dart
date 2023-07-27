@@ -90,7 +90,10 @@ class ScetUi{
   ///表单卡片
   ///title：标题
   ///children：表单内容
-  static Widget dataCard({String? title,required List<Widget> children,bool top = true,bool padding = true,int watermarkFontSize = 100, int watermarkCount = 1, Function? onTap}){
+  ///index:标题下标
+  ///titleIcon: 标题icon
+  ///log:蓝色标签
+  static Widget dataCard({int? index,Widget? titleIcon, bool log = false, String? title,required List<Widget> children,bool top = true,bool padding = true,int watermarkFontSize = 100, int watermarkCount = 1, Function? onTap}){
     return InkWell(
       child: Container(
         width: px(750),
@@ -98,20 +101,53 @@ class ScetUi{
         padding: padding ? EdgeInsets.all(px(16)) : EdgeInsets.all(px(0)),
         decoration: BoxDecoration(
           color: Color(0xffffffff),
+            borderRadius: BorderRadius.all(Radius.circular(px(5)))
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Visibility(
-              visible: title?.isNotEmpty ?? false,
-              child: Text(
-                "$title",
-                style: TextStyle(
-                  color: Color(0xff323233),
-                  fontSize: sp(28),
-                  fontFamily: "M",
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Visibility(
+                  visible: index == null ? false : true,
+                  child: Text(
+                    "$index.",
+                    style: TextStyle(
+                      color: Color(0xff323233),
+                      fontSize: sp(28),
+                      fontFamily: "M",
+                    ),
+                  ),
                 ),
-              ),
+                Visibility(
+                  visible: log,
+                  child: Container(
+                    width: px(6),
+                    height: px(24),
+                    margin: EdgeInsets.only(right: px(8),top: px(8)),
+                    decoration: BoxDecoration(
+                        color: const Color(0xFF3377FF),
+                        borderRadius: BorderRadius.all(Radius.circular(px(3)))
+                    ),
+                  ),
+                ),
+                titleIcon ?? Container(),
+                Expanded(
+                  child: Visibility(
+                      visible: title?.isNotEmpty ?? false,
+                      child: Text(
+                        "$title",
+                        style: TextStyle(
+                          color: Color(0xff323233),
+                          fontSize: sp(28),
+                          fontFamily: "M",
+                        ),
+                      )
+                  ),
+                ),
+              ],
             ),
             Container(
               padding: EdgeInsets.only(top: px(10.0)),
