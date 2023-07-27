@@ -97,10 +97,10 @@ class ScetUi{
     return InkWell(
       child: Container(
         width: px(750),
-        margin: EdgeInsets.only(top: top ? px(4):0),
+        margin: EdgeInsets.only(left: px(24),right: px(24),top: px(12),bottom: px(12)),
         padding: padding ? EdgeInsets.all(px(16)) : EdgeInsets.all(px(0)),
         decoration: BoxDecoration(
-          color: Color(0xffffffff),
+          color: const Color(0xffffffff),
             borderRadius: BorderRadius.all(Radius.circular(px(5)))
         ),
         child: Column(
@@ -115,7 +115,7 @@ class ScetUi{
                   child: Text(
                     "$index.",
                     style: TextStyle(
-                      color: Color(0xff323233),
+                      color: const Color(0xff323233),
                       fontSize: sp(28),
                       fontFamily: "M",
                     ),
@@ -140,7 +140,7 @@ class ScetUi{
                       child: Text(
                         "$title",
                         style: TextStyle(
-                          color: Color(0xff323233),
+                          color: const Color(0xff323233),
                           fontSize: sp(28),
                           fontFamily: "M",
                         ),
@@ -186,30 +186,28 @@ class ScetUi{
                 children: [
                   Visibility(
                     visible: expandedLeft,
-                    child: Expanded(
-                      child: SizedBox(
-                          child: Text(
-                              '$title',
-                              textAlign: TextAlign.justify,
-                              style: TextStyle(
-                                  color: titleColor ?? Color(0XFF969799),
-                                  fontSize: sp(28.0),
-                                  fontWeight: FontWeight.w500
-                              )
-                          )
-                      ),
-                    ),
                     replacement: SizedBox(
                         width: px(150),
                         child: Text(
                             '$title',
                             textAlign: TextAlign.justify,
                             style: TextStyle(
-                                color: titleColor ?? Color(0XFF969799),
+                                color: titleColor ?? const Color(0XFF969799),
                                 fontSize: sp(28.0),
                                 fontWeight: FontWeight.w500
                             )
                         )
+                    ),
+                    child: Expanded(
+                      child: Text(
+                          '$title',
+                          textAlign: TextAlign.justify,
+                          style: TextStyle(
+                              color: titleColor ?? const Color(0XFF969799),
+                              fontSize: sp(28.0),
+                              fontWeight: FontWeight.w500
+                          )
+                      )
                     ),
                   ),
                   expanded ? Expanded(child: child) : child
@@ -241,12 +239,12 @@ class ScetUi{
                 isCollapsed: true,
                 hintText: '$hintText',
                 hintStyle: TextStyle(
-                    color: Color(0XFFB0B2B8),
+                    color: const Color(0XFFB0B2B8),
                     fontSize: sp(28.0)
                 ),
                 contentPadding: EdgeInsets.all(px(16.0)),
                 filled: filled,
-                fillColor: Color(0XFFF5F6FA),
+                fillColor: const Color(0XFFF5F6FA),
                 border: InputBorder.none,
               ),
               maxLines: lines,
@@ -258,7 +256,7 @@ class ScetUi{
               ] : null,
               keyboardType: keyboardType ?? TextInputType.text,
               style: TextStyle(
-                color: Color(0XFF2E2F33),
+                color: const Color(0XFF2E2F33),
                 fontSize: sp(28.0),
               )
           ),
@@ -295,10 +293,10 @@ class ScetUi{
                 style: TextStyle(
                     fontSize: sp(24),
                     fontFamily: "R",
-                    color: canColors ?? Color(0xFF323233)),
+                    color: canColors ?? const Color(0xFF323233)),
               ),
               decoration: BoxDecoration(
-                border: Border.all(width: px(2),color: canColors ?? Color(0XffE8E8E8)),
+                border: Border.all(width: px(2),color: canColors ?? const Color(0XffE8E8E8)),
                 borderRadius: BorderRadius.all(Radius.circular(px(28))),
               ),
             ),
@@ -320,8 +318,8 @@ class ScetUi{
                     color: subTextColor ?? Colors.white),
               ),
               decoration: BoxDecoration(
-                color: subfill ? (subColors ?? Color(0xff4D7FFF)) : Colors.transparent,
-                border: Border.all(width: px(2),color: subColors ?? Color(0XffE8E8E8)),
+                color: subfill ? (subColors ?? const Color(0xff4D7FFF)) : Colors.transparent,
+                border: Border.all(width: px(2),color: subColors ?? const Color(0XffE8E8E8)),
                 borderRadius: BorderRadius.all(Radius.circular(px(28))),
               ),
             ),
@@ -343,8 +341,8 @@ class ScetUi{
                     color: subTextColor ?? Colors.white),
               ),
               decoration: BoxDecoration(
-                color: subfill ? (subColors2 ?? Color(0xff4D7FFF)) : Colors.transparent,
-                border: Border.all(width: px(2),color: subColors2 ?? Color(0XffE8E8E8)),
+                color: subfill ? (subColors2 ?? const Color(0xff4D7FFF)) : Colors.transparent,
+                border: Border.all(width: px(2),color: subColors2 ?? const Color(0XffE8E8E8)),
                 borderRadius: BorderRadius.all(Radius.circular(px(28))),
               ),
             ),
