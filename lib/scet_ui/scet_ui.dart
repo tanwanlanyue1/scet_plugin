@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:scet_plugin/scet_plugin.dart';
 import 'package:scet_plugin/tool/screen/screen.dart';
 
@@ -41,7 +42,6 @@ class ScetUi{
 
   /// AppBar的返回按钮
   static Widget leading(LeadingType type,{Function? leadingOnTap,Widget? customLeading, String? homeRouterStr}){
-
     switch(type){
 
       case LeadingType.none : { return Container(); }
@@ -62,7 +62,7 @@ class ScetUi{
               width: px(40),
               height: px(40),
               alignment: Alignment.center,
-              child: Image.asset('lib/assets/icons/other/back.png',fit: BoxFit.fill,width: px(40),height: px(40),),
+              child: Image.asset('images/back.png', package: 'scet_plugin',fit: BoxFit.fill,width: px(40),height: px(40),),
             ),
           );
         }
@@ -78,8 +78,9 @@ class ScetUi{
               width: px(40),
               height: px(40),
               alignment: Alignment.center,
-              child: Image.asset('lib/assets/icon/other/home.png',fit: BoxFit.fill,width: px(40),height: px(40),),
-            ),
+                // child: Image(image: const AssetImage('assets/icons/other/home.png', package: ''),fit: BoxFit.fill,width: px(40),height: px(40))
+              child: Image.asset('images/home.png', package: 'scet_plugin',fit: BoxFit.fill,width: px(40),height: px(40),),
+            )
           );
         }
       default: return Container();
@@ -125,6 +126,201 @@ class ScetUi{
     );
   }
 
+  ///表格行项目
+  ///titleColor:标题颜色
+  ///title:标题
+  ///alignStart:居上
+  static Widget rowItem({
+    Color? titleColor,
+    bool alignStart = false,
+    bool padding = true,
+    bool expanded = true,
+    bool expandedLeft = false,
+    String? title,
+    required Widget child,
+    Widget? childBottom,
+  }) {
+    return Padding(
+        padding: padding ? EdgeInsets.only(top: px(12),bottom: px(12)) : EdgeInsets.zero,
+        child: Column(
+          children: [
+            Row(
+                crossAxisAlignment: alignStart ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Visibility(
+                    visible: expandedLeft,
+                    child: Expanded(
+                      child: SizedBox(
+                          child: Text(
+                              '$title',
+                              textAlign: TextAlign.justify,
+                              style: TextStyle(
+                                  color: titleColor ?? Color(0XFF969799),
+                                  fontSize: sp(28.0),
+                                  fontWeight: FontWeight.w500
+                              )
+                          )
+                      ),
+                    ),
+                    replacement: SizedBox(
+                        width: px(150),
+                        child: Text(
+                            '$title',
+                            textAlign: TextAlign.justify,
+                            style: TextStyle(
+                                color: titleColor ?? Color(0XFF969799),
+                                fontSize: sp(28.0),
+                                fontWeight: FontWeight.w500
+                            )
+                        )
+                    ),
+                  ),
+                  expanded ? Expanded(child: child) : child
+                ]
+            ),
+            if(childBottom != null)childBottom
+          ],
+        )
+    );
+  }
+
+  ///输入框
+  ///disabled:启用
+  ///filled:填充的背景色
+  ///hintText:默认
+  ///onChanged:回调
+  ///chat_unit:单位
+  ///TextInputType 键盘类型
+  static Widget inputWidget({String value = '', bool? disabled, bool filled = true, String? hintText = '请输入', Function? onChanged,int lines = 1, String? unit,TextInputType? keyboardType,bool number = false }) {
+    final TextEditingController _inputWidgetController = TextEditingController();
+    _inputWidgetController.text = value;
+    return Row(
+      children: [
+        Expanded(
+          child: TextFormField(
+              enabled: disabled,
+              controller: _inputWidgetController,
+              decoration: InputDecoration(
+                isCollapsed: true,
+                hintText: '$hintText',
+                hintStyle: TextStyle(
+                    color: Color(0XFFB0B2B8),
+                    fontSize: sp(28.0)
+                ),
+                contentPadding: EdgeInsets.all(px(16.0)),
+                filled: filled,
+                fillColor: Color(0XFFF5F6FA),
+                border: InputBorder.none,
+              ),
+              maxLines: lines,
+              onChanged: (val){
+                onChanged?.call(val);
+              },
+              inputFormatters: number ? [
+                FilteringTextInputFormatter.allow(RegExp("[0-9.]")),//数字包括小数
+              ] : null,
+              keyboardType: keyboardType ?? TextInputType.text,
+              style: TextStyle(
+                color: Color(0XFF2E2F33),
+                fontSize: sp(28.0),
+              )
+          ),
+        ),
+        if(unit != null)Text(
+          unit,style: TextStyle( fontSize: sp(28.0)),
+        )
+      ],
+    );
+  }
+
+  ///提交按钮
+  ///cancel:取消回调
+  ///submit:提交回调
+  ///canColors:取消背景色
+  ///subColors:提交背景色
+  ///subTextColor:提交文字颜色
+  ///subfill:提交背景色是否填充
+  static Widget submit({Function? cancel,Function? submit,Function? submit2,String? cancels,String? submits,String? submits2,Color? subTextColor,Color? canColors,Color? subColors,Color? subColors2,double? textHeight,double? textWidth,bool subfill = false}){
+    return Container(
+      height: px(88),
+      margin: EdgeInsets.only(top: px(4)),
+      color: Colors.white,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          GestureDetector(
+            child: Container(
+              width: px(textWidth ?? 240),
+              height: px(textHeight ?? 56),
+              alignment: Alignment.center,
+              child: Text(
+                cancels ?? '取消',
+                style: TextStyle(
+                    fontSize: sp(24),
+                    fontFamily: "R",
+                    color: canColors ?? Color(0xFF323233)),
+              ),
+              decoration: BoxDecoration(
+                border: Border.all(width: px(2),color: canColors ?? Color(0XffE8E8E8)),
+                borderRadius: BorderRadius.all(Radius.circular(px(28))),
+              ),
+            ),
+            onTap: (){
+              cancel?.call();
+            },
+          ),
+          if(submit != null) GestureDetector(
+            child: Container(
+              width: px(textWidth ?? 240),
+              height: px(textHeight ?? 56),
+              alignment: Alignment.center,
+              margin: EdgeInsets.only(left: px(24)),
+              child: Text(
+                submits ?? '提交',
+                style: TextStyle(
+                    fontSize: sp(24),
+                    fontFamily: "R",
+                    color: subTextColor ?? Colors.white),
+              ),
+              decoration: BoxDecoration(
+                color: subfill ? (subColors ?? Color(0xff4D7FFF)) : Colors.transparent,
+                border: Border.all(width: px(2),color: subColors ?? Color(0XffE8E8E8)),
+                borderRadius: BorderRadius.all(Radius.circular(px(28))),
+              ),
+            ),
+            onTap: (){
+              submit.call();
+            },
+          ),
+          if(submit2 != null) GestureDetector(
+            child: Container(
+              width: px(textWidth ?? 240),
+              height: px(textHeight ?? 56),
+              alignment: Alignment.center,
+              margin: EdgeInsets.only(left: px(24)),
+              child: Text(
+                submits2 ?? '提交',
+                style: TextStyle(
+                    fontSize: sp(24),
+                    fontFamily: "R",
+                    color: subTextColor ?? Colors.white),
+              ),
+              decoration: BoxDecoration(
+                color: subfill ? (subColors2 ?? Color(0xff4D7FFF)) : Colors.transparent,
+                border: Border.all(width: px(2),color: subColors2 ?? Color(0XffE8E8E8)),
+                borderRadius: BorderRadius.all(Radius.circular(px(28))),
+              ),
+            ),
+            onTap: (){
+              submit2.call();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
 }
 
 /// 定制的Appbar 返回按钮的类型
@@ -133,4 +329,24 @@ enum LeadingType {
   back,
   home,
   custom
+}
+
+
+/// 枚举页面类型
+/// add, 新增模式
+/// edit, 编辑模式
+/// details, // 详情显示模式
+enum PageType {
+  add(1, '新增模式'),
+  edit(2, '编辑模式'),
+  details(3, '编辑模式'),
+  custom(4, '自定义模式');
+
+  const PageType(this.type,this.value,);
+  final int type;
+  final String value;
+
+  static PageType getTypeByTitle(String title) => PageType.values.firstWhere((activity) => activity.value == title);
+  static PageType getType(int number) => PageType.values.firstWhere((activity) => activity.type == number);
+  static String getValue(int number) => PageType.values.firstWhere((activity) => activity.type == number).value;
 }

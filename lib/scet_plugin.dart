@@ -3,6 +3,7 @@ import 'package:scet_plugin/scet_ui/scet_ui.dart';
 import 'scet_plugin_platform_interface.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'components/toast_widget/toast_widget.dart';
+import 'components/down_input/down_input.dart';
 class ScetPlugin {
   /// 插件初始化
   /// navigatorKey 路由key
