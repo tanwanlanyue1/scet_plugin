@@ -29,6 +29,11 @@ class MockScetPluginPlatform
     // TODO: implement getIsUsingWeChat
     throw UnimplementedError();
   }
+
+  @override
+  void setTitle(String title) {
+    // TODO: implement setTitle
+  }
 }
 
 void main() {

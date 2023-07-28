@@ -31,4 +31,9 @@ class MethodChannelScetPlugin extends ScetPluginPlatform {
   Future<String?> weiXinDownLoad(String filePath) async{
     return '未实现';
   }
+
+  @override
+  Future<String?> setTitle(String title) async{
+    return '未实现';
+  }
 }

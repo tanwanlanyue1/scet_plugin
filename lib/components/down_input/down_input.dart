@@ -134,7 +134,7 @@ class _DownInputState extends State<DownInput> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, designSize: const Size(750.0, 1334.0),);
+    // ScreenUtil.init(context, designSize: const Size(750.0, 1334.0),);
     return InkWell(
       child: Container(
         width: px(526.0),

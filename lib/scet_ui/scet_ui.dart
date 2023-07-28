@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:scet_plugin/scet_plugin.dart';
@@ -20,24 +21,30 @@ class ScetUi{
   /// customLeading 自定义的返回样式
   /// actionsChild 右侧按钮自定义
   /// homeRouterStr 返回路由的默认路由字段
-  static PreferredSizeWidget appBar(String title,{LeadingType leadingType = LeadingType.back, Function? leadingOnTap,Widget? customLeading, Widget? actionsChild,String? homeRouterStr = '/HomePage'}){
-    return AppBar(
-      centerTitle: true,
-      elevation: 0,
-      backgroundColor: const Color(0xFFFFFFFF),
-      title: Text(title,style: TextStyle(color: const Color(0xFF323233),fontSize: sp(36),fontFamily: "M"),),
-      leading: ScetPlugin.getIsMiniProgramn()
-          ? const Text('')
-          : leading(
-          leadingType,
-          leadingOnTap:leadingOnTap,
-          customLeading:customLeading,
-          homeRouterStr:homeRouterStr
-      ),
-      actions: [
-        actionsChild ?? Container()
-      ],
-    );
+  static PreferredSizeWidget? appBar(String title,{LeadingType leadingType = LeadingType.back, Function? leadingOnTap,Widget? customLeading, Widget? actionsChild,String? homeRouterStr = '/HomePage'}){
+    AppBar? appBar;
+    if(kIsWeb){
+      ScetPlugin.setTitle(title);
+    } else {
+      appBar = AppBar(
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: const Color(0xFFFFFFFF),
+        title: Text(title,style: TextStyle(color: const Color(0xFF323233),fontSize: sp(36),fontFamily: "M"),),
+        leading: ScetPlugin.getIsMiniProgramn()
+            ? const Text('')
+            : leading(
+            leadingType,
+            leadingOnTap:leadingOnTap,
+            customLeading:customLeading,
+            homeRouterStr:homeRouterStr
+        ),
+        actions: [
+          actionsChild ?? Container()
+        ],
+      );
+    }
+    return appBar;
   }
 
   /// AppBar的返回按钮
@@ -93,7 +100,8 @@ class ScetUi{
   ///index:标题下标
   ///titleIcon: 标题icon
   ///log:蓝色标签
-  static Widget dataCard({int? index,Widget? titleIcon, bool log = false, String? title,required List<Widget> children,bool top = true,bool padding = true,int watermarkFontSize = 100, int watermarkCount = 1, Function? onTap}){
+  ///more 更多 右箭頭
+  static Widget dataCard({int? index,Widget? titleIcon, bool log = false, String? title,required List<Widget> children,bool top = true,bool padding = true,int watermarkFontSize = 100, int watermarkCount = 1, Function? onTap,bool more = false}){
     return InkWell(
       child: Container(
         width: px(750),
@@ -147,6 +155,14 @@ class ScetUi{
                       )
                   ),
                 ),
+                Visibility(
+                  visible: more,
+                  child:  SizedBox(
+                      width: px(40),
+                      height: px(40),
+                      child: Image.asset('images/right.png',package: 'scet_plugin',fit: BoxFit.fill,width: px(40),height: px(40),)
+                  ),
+                )
               ],
             ),
             Container(
@@ -218,6 +234,46 @@ class ScetUi{
         )
     );
   }
+
+  static Widget formRowItem({int? index,bool? reading,bool? padding, bool alignStart = false, String? title, required Widget child, Widget? action}) {
+    return Padding(
+        padding: EdgeInsets.only(bottom: px(16.0),left: index != null ? 0 : px(39) ),
+        child: Row(
+            crossAxisAlignment: alignStart ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              if(index != null)Container(
+                width: px(32),
+                height: px(32),
+                margin: EdgeInsets.only(right: px(7),top:  alignStart ? px(15) : 0),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(px(16)),
+                    color: Color(0xff4D7CFF)
+                ),
+                alignment: Alignment.center,
+                child: Text('$index',style: TextStyle(color: Colors.white,fontSize: sp(20),fontFamily: "M")),
+              ),
+              Container(
+                  width: px(180.0),
+                  padding: EdgeInsets.only(top: 0),
+                  child: Text(
+                      title != null ? '$title：' :'',
+                      textAlign: TextAlign.justify,
+                      style: TextStyle(
+                        color: reading == true? Colors.red : Color(0XFF909299),
+                        fontSize: sp(25.0),
+                      )
+                  )
+              ),
+              Expanded(
+                  child: child
+              ),
+              action ?? Container()
+            ]
+        )
+    );
+  }
+
 
   ///输入框
   ///disabled:启用
@@ -371,16 +427,16 @@ enum LeadingType {
 /// edit, 编辑模式
 /// details, // 详情显示模式
 enum PageType {
-  add(1, '新增模式'),
-  edit(2, '编辑模式'),
-  details(3, '编辑模式'),
-  custom(4, '自定义模式');
+  add(1, '新增'),
+  edit(2, '编辑'),
+  details(3, '详情'),
+  custom(4, '自定义');
 
-  const PageType(this.type,this.value,);
+  const PageType(this.type,this.name,);
   final int type;
-  final String value;
+  final String name;
 
-  static PageType getTypeByTitle(String title) => PageType.values.firstWhere((activity) => activity.value == title);
+  static PageType getTypeByTitle(String title) => PageType.values.firstWhere((activity) => activity.name == title);
   static PageType getType(int number) => PageType.values.firstWhere((activity) => activity.type == number);
-  static String getValue(int number) => PageType.values.firstWhere((activity) => activity.type == number).value;
+  static String getValue(int number) => PageType.values.firstWhere((activity) => activity.type == number).name;
 }

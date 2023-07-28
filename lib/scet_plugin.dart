@@ -4,6 +4,8 @@ import 'scet_plugin_platform_interface.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'components/toast_widget/toast_widget.dart';
 import 'components/down_input/down_input.dart';
+import 'tool/logOut/log_out.dart';
+import 'tool/logOut/log_utils.dart';
 class ScetPlugin {
   /// 插件初始化
   /// navigatorKey 路由key
@@ -38,6 +40,11 @@ class ScetPlugin {
   /// 判断是否是微信 的 浏览器
   static bool getIsUsingWeChat() {
     return  ScetPluginPlatform.instance.getIsUsingWeChat();
+  }
+
+  /// web刷新标签栏
+  static void setTitle(String title) {
+    return  ScetPluginPlatform.instance.setTitle(title);
   }
 
 }

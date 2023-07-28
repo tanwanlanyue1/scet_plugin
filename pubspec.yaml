@@ -22,6 +22,7 @@ dependencies:
   image_gallery_saver: ^1.6.9 #保存图片到图库
   cached_network_image: ^3.2.0 #缓存图片
   photo_view: ^0.14.0  #图片预览
+  package_info_plus: ^4.0.2 #应用程序包的信息
 
 dev_dependencies:
   flutter_test:
@@ -58,6 +59,7 @@ flutter:
   assets:
     - images/back.png
     - images/home.png
+    - images/right.png
   #
   # For details regarding assets in packages, see
   # https://flutter.dev/assets-and-images/#from-packages

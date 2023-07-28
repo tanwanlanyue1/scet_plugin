@@ -46,4 +46,10 @@ class ScetPluginWeb extends ScetPluginPlatform {
     String userAgent = html.window.navigator.userAgent;
     return userAgent.contains('MicroMessenger');
   }
+
+  /// 刷新页面标题
+  @override
+  void setTitle(String title) {
+    html.document.title = title;
+  }
 }

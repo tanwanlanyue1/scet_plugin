@@ -29,7 +29,7 @@ abstract class ScetPluginPlatform extends PlatformInterface {
 
   /// web下的微信下载事件
   Future<String?> weiXinDownLoad(String filePath) {
-    throw UnimplementedError('getIsMiniProgramn() has not been implemented.');
+    throw UnimplementedError('weiXinDownLoad() has not been implemented.');
   }
 
   /// 判断是否小程序
@@ -39,6 +39,10 @@ abstract class ScetPluginPlatform extends PlatformInterface {
 
   /// 判断是否是微信 的 浏览器
   bool getIsUsingWeChat() {
-    throw UnimplementedError('getIsMiniProgramn() has not been implemented.');
+    throw UnimplementedError('getIsUsingWeChat() has not been implemented.');
+  }
+
+  void setTitle(String title){
+    throw UnimplementedError('setTitle() has not been implemented.');
   }
 }
