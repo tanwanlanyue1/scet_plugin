@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:scet_plugin/tool/wx/WxConfigData.dart';
 
 import 'scet_plugin_platform_interface.dart';
 
@@ -13,6 +14,12 @@ class MethodChannelScetPlugin extends ScetPluginPlatform {
   Future<String?> getPlatformVersion() async {
     final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
     return version;
+  }
+
+  /// 微信jssdk初始化
+  @override
+  Future<void> weiXinInit(WxConfigData wxConfigData) async {
+    // return '未实现';
   }
 
   /// 判断是否小程序

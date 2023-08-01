@@ -2,9 +2,11 @@
 // of your plugin as a separate package, instead of inlining it in the same
 // package as the core of your plugin.
 // ignore: avoid_web_libraries_in_flutter
+import 'dart:convert';
 import 'dart:html' as html;
 import 'dart:js' as js;
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
+import 'package:scet_plugin/tool/wx/WxConfigData.dart';
 
 import 'scet_plugin_platform_interface.dart';
 
@@ -24,6 +26,12 @@ class ScetPluginWeb extends ScetPluginPlatform {
     return version;
   }
 
+  ///微信jssdk初始化
+  @override
+  Future<void> weiXinInit(WxConfigData wxConfigData) async {
+    print('开始微信jsSdk初始化');
+    return js.context.callMethod('weiXinInit',[jsonEncode(wxConfigData.toJson())]);
+  }
 
   /// Returns a [String] containing the version of the platform.
   /// 开始微信js通讯

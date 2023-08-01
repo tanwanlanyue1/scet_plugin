@@ -1,4 +1,5 @@
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+import 'package:scet_plugin/tool/wx/WxConfigData.dart';
 
 import 'scet_plugin_method_channel.dart';
 
@@ -27,6 +28,11 @@ abstract class ScetPluginPlatform extends PlatformInterface {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
 
+  /// web下的微信jsSdk初始化配置
+  Future<void> weiXinInit(WxConfigData wxConfigData) {
+    throw UnimplementedError('wxInit() has not been implemented.');
+  }
+
   /// web下的微信下载事件
   Future<String?> weiXinDownLoad(String filePath) {
     throw UnimplementedError('weiXinDownLoad() has not been implemented.');
@@ -42,6 +48,7 @@ abstract class ScetPluginPlatform extends PlatformInterface {
     throw UnimplementedError('getIsUsingWeChat() has not been implemented.');
   }
 
+  /// 页面标题修改
   void setTitle(String title){
     throw UnimplementedError('setTitle() has not been implemented.');
   }

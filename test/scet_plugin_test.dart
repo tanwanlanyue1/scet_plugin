@@ -3,6 +3,7 @@ import 'package:scet_plugin/scet_plugin.dart';
 import 'package:scet_plugin/scet_plugin_platform_interface.dart';
 import 'package:scet_plugin/scet_plugin_method_channel.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+import 'package:scet_plugin/tool/wx/WxConfigData.dart';
 
 class MockScetPluginPlatform
     with MockPlatformInterfaceMixin
@@ -34,6 +35,13 @@ class MockScetPluginPlatform
   void setTitle(String title) {
     // TODO: implement setTitle
   }
+
+  @override
+  Future<void> weiXinInit(WxConfigData wxConfigData) {
+    // TODO: implement weiXinInit
+    throw UnimplementedError();
+  }
+  
 }
 
 void main() {
