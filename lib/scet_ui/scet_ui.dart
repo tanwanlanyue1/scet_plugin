@@ -8,7 +8,7 @@ import 'package:scet_plugin/tool/screen/screen.dart';
 class ScetUi{
 
   static init(GlobalKey<NavigatorState> key){
-    print('---中联兴uiz组件件初始化---');
+    print('---中联兴ui组件件初始化---');
     navigatorKey = key;
   }
   /// 需要初始化的时候传入一个全局的navigatorKey 作为上下文
@@ -411,6 +411,16 @@ class ScetUi{
     );
   }
 
+  /// 字符串 超出 并且截取成省略号
+  /// str 要截取的字符串
+  /// maxLength 显示正常的字符串长度 超出部分则为......
+  static String truncateString(String str, int maxLength) {
+    if (str.length <= maxLength) {
+      return str;
+    } else {
+      return str.replaceRange(maxLength, str.length, '......');
+    }
+  }
 }
 
 /// 定制的Appbar 返回按钮的类型

@@ -33,9 +33,15 @@ abstract class ScetPluginPlatform extends PlatformInterface {
     throw UnimplementedError('wxInit() has not been implemented.');
   }
 
-  /// web下的微信下载事件
-  Future<String?> weiXinDownLoad(String filePath) {
-    throw UnimplementedError('weiXinDownLoad() has not been implemented.');
+  // 微信jssdk的方法回调
+  void weiXinConfigCallbackList({
+    Function? weiXinCallbackJsSdkInit
+  }){
+    throw UnimplementedError('weiXinConfigCallbackList() has not been implemented.');
+  }
+  /// web下 微信页面跳转
+  Future<String?> toWeiXinMiniProgramPage(String page) {
+    throw UnimplementedError('toWeiXinMiniProgramPage() has not been implemented.');
   }
 
   /// 判断是否小程序

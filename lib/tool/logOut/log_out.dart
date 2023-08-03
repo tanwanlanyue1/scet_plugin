@@ -9,7 +9,7 @@ class LogOut {
   static int popTrue = 0; //记录返回次数 为3就是退出app
 
   static init (String title){
-    print('———首页返回组件初始化--');
+    print('———中联兴首页返回组件初始化--');
     title = title;
   }
   ///判断是否退出

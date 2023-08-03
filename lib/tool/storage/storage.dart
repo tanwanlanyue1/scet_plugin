@@ -10,6 +10,7 @@ class StorageUtil {
   StorageUtil._();
 
   static Future<void> init() async {
+    print('———中联兴本地存储工具初始化--');
     _prefs ??= await SharedPreferences.getInstance();
   }
 

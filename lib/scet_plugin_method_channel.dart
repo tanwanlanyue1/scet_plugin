@@ -22,6 +22,14 @@ class MethodChannelScetPlugin extends ScetPluginPlatform {
     // return '未实现';
   }
 
+  /// 微信jssdk方法回调列表
+  @override
+  void weiXinConfigCallbackList({
+    Function? weiXinCallbackJsSdkInit
+  }) async {
+    // return '未实现';
+  }
+
   /// 判断是否小程序
   @override
   bool getIsMiniProgramn()  {
@@ -35,7 +43,7 @@ class MethodChannelScetPlugin extends ScetPluginPlatform {
   }
 
   @override
-  Future<String?> weiXinDownLoad(String filePath) async{
+  Future<String?> toWeiXinMiniProgramPage(String page) async{
     return '未实现';
   }
 

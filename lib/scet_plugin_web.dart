@@ -33,12 +33,30 @@ class ScetPluginWeb extends ScetPluginPlatform {
     return js.context.callMethod('weiXinInit',[jsonEncode(wxConfigData.toJson())]);
   }
 
+  ///执行微信等待返回的数据
+  ///weiXinCallbackJsSdkInit 会返回一个bool 提示小程序启动是否成功
+  @override
+  Future weiXinConfigCallbackList({
+    Function? weiXinCallbackJsSdkInit
+  }) async {
+    //定义js可调用的方法
+    js.context["weiXinCallback"] =  (e) {
+      print("我调用到了flutter!");
+      print("${e.toString()}");
+      final data = jsonDecode(e);
+      if(data['type'] == 'weiXinCallback-jsSdkInit'){
+        weiXinCallbackJsSdkInit?.call(data['data']);
+      }
+      return e;
+    };
+  }
+
   /// Returns a [String] containing the version of the platform.
   /// 开始微信js通讯
   @override
-  Future<String?> weiXinDownLoad(String filePath) async {
-    print('开始微信js通讯');
-    return js.context.callMethod('wxPostMessage',[filePath]);
+  Future<String?> toWeiXinMiniProgramPage(String page) async {
+    print('开始微信js通讯-页面跳转');
+    return js.context.callMethod('toWeiXinMiniProgramPage',[page]);
   }
 
   /// 判断是否小程序

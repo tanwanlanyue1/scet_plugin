@@ -7,11 +7,21 @@ import 'components/toast_widget/toast_widget.dart';
 import 'components/down_input/down_input.dart';
 import 'tool/logOut/log_out.dart';
 import 'tool/logOut/log_utils.dart';
+import 'package:scet_plugin/tool/storage/storage.dart';
+import 'package:scet_plugin/tool/permission/permission_manage.dart';
+import 'package:scet_plugin/tool/wx/wei_xin_miniprogram.dart';
 class ScetPlugin {
   /// 插件初始化
   /// navigatorKey 路由key
-  static init(){
+  static init({required GlobalKey<NavigatorState> key,required String appTitle}) async {
     print('---中联兴插件初始化---');
+
+    ScetUi.init(key);
+
+    LogOut.init(appTitle);
+
+    // 本地存储工具初始化
+    await StorageUtil.init();
   }
 
   Future<String?> getPlatformVersion() {
@@ -34,9 +44,9 @@ class ScetPlugin {
   }
 
 
-  /// 开始微信js通讯 下载
-  static Future<String?> weiXinDownLoad(String filePath) async {
-    return ScetPluginPlatform.instance.weiXinDownLoad(filePath);
+  /// 开始微信js通讯 页面跳转
+  static Future<String?> toWeiXinMiniProgramPage(String page) async {
+    return ScetPluginPlatform.instance.toWeiXinMiniProgramPage(page);
   }
 
   /// 判断是否小程序
@@ -54,4 +64,7 @@ class ScetPlugin {
     return  ScetPluginPlatform.instance.setTitle(title);
   }
 
+  static void weiXinConfigCallbackList({Function? weiXinCallbackJsSdkInit}){
+    return  ScetPluginPlatform.instance.weiXinConfigCallbackList(weiXinCallbackJsSdkInit: weiXinCallbackJsSdkInit);
+  }
 }

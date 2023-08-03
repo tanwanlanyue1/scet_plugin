@@ -24,12 +24,12 @@ class WxConfigData {
     jsApiList = json['jsApiList'] != null ? json['jsApiList'].cast<String>() : [];
   }
   String? appId;
-  String? timestamp;
+  num? timestamp;
   String? nonceStr;
   String? signature;
   List<String>? jsApiList;
 WxConfigData copyWith({  String? appId,
-  String? timestamp,
+  num? timestamp,
   String? nonceStr,
   String? signature,
   List<String>? jsApiList,

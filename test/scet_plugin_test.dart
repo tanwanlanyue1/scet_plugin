@@ -41,6 +41,17 @@ class MockScetPluginPlatform
     // TODO: implement weiXinInit
     throw UnimplementedError();
   }
+
+  @override
+  void weiXinConfigCallbackList({Function? weiXinCallbackJsSdkInit}) {
+    // TODO: implement weiXinConfigCallbackList
+  }
+
+  @override
+  Future<String?> toWeiXinMiniProgramPage(String page) {
+    // TODO: implement toWeiXinMiniProgramPage
+    throw UnimplementedError();
+  }
   
 }
 
