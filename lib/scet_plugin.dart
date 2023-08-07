@@ -7,21 +7,18 @@ import 'components/toast_widget/toast_widget.dart';
 import 'components/down_input/down_input.dart';
 import 'tool/logOut/log_out.dart';
 import 'tool/logOut/log_utils.dart';
-import 'package:scet_plugin/tool/storage/storage.dart';
 import 'package:scet_plugin/tool/permission/permission_manage.dart';
 import 'package:scet_plugin/tool/wx/wei_xin_miniprogram.dart';
 class ScetPlugin {
   /// 插件初始化
   /// navigatorKey 路由key
-  static init({required GlobalKey<NavigatorState> key,required String appTitle}) async {
+  static init({required GlobalKey<NavigatorState> key,required String appTitle,required bool isDebug}) async {
     print('---中联兴插件初始化---');
-
     ScetUi.init(key);
 
     LogOut.init(appTitle);
 
-    // 本地存储工具初始化
-    await StorageUtil.init();
+    PrintLog.init(title: appTitle, isDebug: isDebug);
   }
 
   Future<String?> getPlatformVersion() {
