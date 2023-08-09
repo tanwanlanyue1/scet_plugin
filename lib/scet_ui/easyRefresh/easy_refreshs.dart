@@ -50,6 +50,6 @@ Footer footers(){
     noMoreText: "没有更多数据啦",
     messageText: "更新于 %T",
     messageStyle: TextStyle(color:  Colors.teal),
-    noMoreIcon: Icon(Icons.warning_amber_outlined)
+    noMoreIcon: Icon(Icons.warning_amber_rounded)
   );
 }

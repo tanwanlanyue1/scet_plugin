@@ -57,17 +57,15 @@ class _CustomEasyRefresherState extends State<CustomEasyRefresher> {
 
   /// 普通构造
   EasyRefresh _easyRefresh(){
-    List<Widget> slivers = widget.slivers!;
+    List<Widget> slivers = List<Widget>.from(widget.slivers!);
     if(widget.pageList.isEmpty){
-      slivers.add(
-          SliverList(
-            delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
-              return noData();
-              },
-              childCount: 1,
-            ),
-          )
-      );
+      slivers.add(SliverList(
+        delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
+          return noData();
+        },
+          childCount: 1,
+        ),
+      ));
     }
     return EasyRefresh(
       // 指定刷新时的头部组件
