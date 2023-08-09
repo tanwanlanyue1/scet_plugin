@@ -1,6 +1,6 @@
 name: scet_plugin
 description: scet_plugin_custom
-version: 0.1.7
+version: 0.1.8
 homepage:
 
 environment:
@@ -23,6 +23,7 @@ dependencies:
   cached_network_image: ^3.2.0 #缓存图片
   photo_view: ^0.14.0  #图片预览
   package_info_plus: ^4.0.2 #应用程序包的信息
+  easy_refresh: ^3.3.2+1 #下拉刷新
 
 dev_dependencies:
   flutter_test:

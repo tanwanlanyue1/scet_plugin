@@ -17,7 +17,8 @@ class DownInput extends StatefulWidget {
   final bool readOnly;    // 是否开启只读
   final bool invert; // 是否开启反选
 
-  const DownInput({Key? key,
+  const DownInput({
+    Key? key,
     this.hitStr = '请选择内容',
     this.value,
     this.data,
@@ -151,9 +152,9 @@ class _DownInputState extends State<DownInput> {
                 child: ScrollConfiguration(
                     behavior: OverScrollBehavior(),
                     child:ListView(
-                      padding: EdgeInsets.all(0),
+                      padding: const EdgeInsets.all(0),
                       scrollDirection:Axis.horizontal,
-                      physics: AlwaysScrollableScrollPhysics(),
+                      physics: const AlwaysScrollableScrollPhysics(),
                       children: [
                         Container(
                           height: px(56),

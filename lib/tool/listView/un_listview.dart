@@ -20,9 +20,9 @@ class OverScrollBehavior extends ScrollBehavior{
             axisDirection: details.direction,
             color: Theme.of(context).colorScheme.secondary
         );
-      case TargetPlatform.linux:break;
-      case TargetPlatform.macOS:break;
-      case TargetPlatform.windows:break;
+      case TargetPlatform.linux: return child;
+      case TargetPlatform.macOS: return child;
+      case TargetPlatform.windows: return child;
     }
     return Container();
   }
