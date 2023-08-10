@@ -1,10 +1,38 @@
 import 'dart:async';
-import 'package:date_format/date_format.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:scet_plugin/components/noData/no_data.dart';
 import 'package:scet_plugin/scet_ui/easyRefresh/easy_refreshs.dart';
 
+/// 自定义下拉刷新
+/// 显示样式分 slivers 和 itemBuilder 两种
+/// 1. slivers ： 组合复杂布局 使用 slivers 数组自定义样式 已经循环
+/// 例子
+///    slivers: <Widget>[
+///           SliverList(
+///             delegate: SliverChildBuilderDelegate((context, index) {
+///               return taskDetail(item: EnforceDetail);},
+///                 childCount: 1),
+///           ),
+///           SliverList(
+///               Map item = _pageList[index];
+///               return  itemCard(
+///                     item: item,
+///                     index:index
+///                 );},
+///                 childCount: _pageList.length),
+///           ),
+///         ],
+///
+/// 2. itemBuilder 内置了Listview 循环 只需要传递循环体本身的每一项
+/// 例子
+///   itemBuilder: (context, index) {
+///           Map item = _pageList[index];
+///           return itemCard(
+///               item: item,
+///               index:index
+///           );
+///         },
 class CustomEasyRefresher extends StatefulWidget {
   // 页面列表数据
   final List pageList;
@@ -131,7 +159,7 @@ class _CustomEasyRefresherState extends State<CustomEasyRefresher> {
   Widget noDataList (context, physics) {
     return ListView(
       physics: physics,
-      children: [ noData()],
+      children: [ noData() ],
     );
   }
 

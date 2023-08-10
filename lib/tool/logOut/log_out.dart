@@ -8,9 +8,9 @@ class LogOut {
   static String title = '';
   static int popTrue = 0; //记录返回次数 为3就是退出app
 
-  static init (String title){
+  static init (String titles){
     print('———中联兴首页返回组件初始化--');
-    title = title;
+    title = titles;
   }
   ///判断是否退出
   static Future<bool> onWillPop() async{
