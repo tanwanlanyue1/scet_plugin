@@ -8,8 +8,9 @@ enum PermissionType {
   storage(1, Permission.storage, '媒体和文件'),
   camera(2, Permission.camera, '拍照'),
   photos(3, Permission.photos , '图库'),
-  phone(4, Permission.photos , '电话簿'),
-  location(5, Permission.photos , '位置');
+  phone(4, Permission.phone , '电话簿'),
+  location(5, Permission.location , '位置'),
+  manageExternalStorage(6, Permission.manageExternalStorage, '媒体和文件');
 
   const PermissionType(this.type, this.permission,this.value,);
   final int type;
