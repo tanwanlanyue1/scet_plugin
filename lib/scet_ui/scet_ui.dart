@@ -275,6 +275,39 @@ class ScetUi{
   }
 
 
+  ///标签头部
+  ///name: 标题
+  ///Icon:图标
+  ///leftIcon: 没有图标时展示
+  static Widget formTitle({ bool leftNoPadding = false, required String name,Color? nameColors,String? icon,double? fontSize,Widget? leftIcon,Widget? rightChild}){
+    return Row(
+      children: [
+        icon != null ?
+        Container(
+          margin: EdgeInsets.only(right: px(16),left: px(leftNoPadding ? 0 : 24)),
+          width: px(40),
+          height: px(40),
+          child: Image.asset(icon),
+        ) :
+        Container(
+          child: leftIcon,
+        ),
+        Expanded(
+            child: Text(name,
+              style: TextStyle(
+                fontSize: sp(fontSize ?? 28),
+                fontFamily: 'M',
+                color: nameColors ?? Color(0xff323233),
+              ),overflow: TextOverflow.ellipsis,)
+        ),
+        Container(
+          child: rightChild,
+        ),
+      ],
+    );
+  }
+
+
   ///输入框
   ///disabled:启用
   ///filled:填充的背景色
@@ -407,6 +440,57 @@ class ScetUi{
             },
           ),
         ],
+      ),
+    );
+  }
+
+
+  static Widget submitLRBtn({
+    Function? cancel,
+    Function? function,
+    Function? redact,
+    String? functionTitle,
+    String? cancelTitle,
+    Color? bgColor
+  }){
+    return  Container(
+      padding: EdgeInsets.symmetric(horizontal: px(24.0),vertical:px(36.0)),
+      child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+                flex: 1,
+                child: InkWell(
+                  onTap: (){
+                    cancel?.call();
+                  },
+                  child:Container(
+                    height: px(70),
+                    decoration: BoxDecoration(
+                        border: Border.all(width: px(1),color: Color(0x66A8ABB3))
+                    ),
+                    child: Center(
+                      child: Text(cancelTitle ?? '取 消',style: TextStyle(color: Color(0xFF606266),fontSize: sp(32)),),
+                    ),
+                  ),
+                )
+            ),
+            Expanded(
+                flex: 1,
+                child: InkWell(
+                  onTap: (){
+                    function?.call();
+                  },
+                  child:Container(
+                    height: px(70),
+                    color: bgColor ?? Color(0xFF52B788),
+                    child: Center(
+                      child: Text('${functionTitle != null ? functionTitle : '提  交'}',style: TextStyle(color: Colors.white,fontSize: sp(29)),),
+                    ),
+                  ),
+                )
+            ),
+          ]
       ),
     );
   }
