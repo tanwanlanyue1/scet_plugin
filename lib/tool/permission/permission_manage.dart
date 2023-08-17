@@ -39,7 +39,7 @@ class PermissionManage{
         PermissionType item = permissionTypeList[i];
         PermissionStatus status = await item.permission.status;
         if (status != PermissionStatus.granted) {
-          status = await Permission.storage.request();
+          status = await item.permission.request();
           if (status != PermissionStatus.granted) {
             ToastWidget.showDialog(
                 msg: '您未授权${item.value}权限，请先授权！',
