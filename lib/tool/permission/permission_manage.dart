@@ -1,11 +1,14 @@
 
 // 需要检查的文件类型
+import 'dart:io';
+
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:scet_plugin/components/toast_widget/toast_widget.dart';
 
 enum PermissionType {
-  storage(1, Permission.storage, '媒体和文件'),
+  storage(1, Permission.storage, '文件'),
   camera(2, Permission.camera, '拍照'),
   photos(3, Permission.photos , '图库'),
   phone(4, Permission.phone , '电话簿'),
@@ -37,6 +40,21 @@ class PermissionManage{
     if(!kIsWeb){
       for(int i = 0; i < permissionTypeList.length; i++){
         PermissionType item = permissionTypeList[i];
+        if (Platform.isAndroid) {
+          AndroidDeviceInfo androidInfo = await DeviceInfoPlugin().androidInfo;
+          int androidVersion = androidInfo.version.sdkInt;
+          if (androidVersion <= 32) {
+            if(item == PermissionType.manageExternalStorage || item == PermissionType.photos){
+              print('1:androidVersion=>$androidVersion');
+              item = PermissionType.storage;
+            }
+          } else {
+            if(item == PermissionType.storage || item == PermissionType.photos){
+              print('2:androidVersion=>$androidVersion');
+              item = PermissionType.manageExternalStorage;
+            }
+          }
+        }
         PermissionStatus status = await item.permission.status;
         if (status != PermissionStatus.granted) {
           status = await item.permission.request();
