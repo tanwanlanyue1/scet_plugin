@@ -315,7 +315,8 @@ class ScetUi{
   ///onChanged:回调
   ///chat_unit:单位
   ///TextInputType 键盘类型
-  static Widget inputWidget({String value = '', bool? disabled, bool filled = true, String? hintText = '请输入', Function? onChanged,int lines = 1, String? unit,TextInputType? keyboardType,bool number = false }) {
+  ///fillColor:填充颜色
+  static Widget inputWidget({String value = '', bool? disabled, bool filled = true, String? hintText = '请输入', Color? fillColor, Function? onChanged,int lines = 1, String? unit,TextInputType? keyboardType,bool number = false }) {
     final TextEditingController _inputWidgetController = TextEditingController();
     _inputWidgetController.text = value;
     return Row(
@@ -333,7 +334,7 @@ class ScetUi{
                 ),
                 contentPadding: EdgeInsets.all(px(16.0)),
                 filled: filled,
-                fillColor: const Color(0XFFF5F6FA),
+                fillColor: fillColor ?? const Color(0XFFF5F6FA),
                 border: InputBorder.none,
               ),
               maxLines: lines,
